@@ -1,5 +1,6 @@
 import React from "react";
 import img from '.././../assets/NewArrivals.webp';
+import { Link } from "react-router-dom";
 
 function NewArrivalsBanner() {
   return (
@@ -25,10 +26,12 @@ function NewArrivalsBanner() {
         <p className="text-lg md:text-xl mb-6">
           Discover the latest trends in fashion
         </p>
+<Link to={"/shop"}>
 
         <button className="bg-white text-black px-8 py-3 rounded-lg font-semibold hover:bg-gray-200 transition">
           Shop Now
         </button>
+</Link>
       </div>
 
     </section>

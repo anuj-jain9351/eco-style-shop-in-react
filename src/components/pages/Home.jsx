@@ -8,10 +8,16 @@ import kids from '.././../assets/kids.png';
 import Sports from '.././../assets/Sports.jpg';
 import WhyChooseUs from "./WhyChooseUs";
 import Testimonials from "./Testimonials";
+import Shop from "./Shop";
+import { Link } from "react-router-dom";
 
-const Home = () => {
+const Home = ({cart,addToCart,search}) => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const FilterSearch = products.filter(products=>{
+   return products.title.toLowerCase().includes(search.toLowerCase() || " ")
+  });
 
   const categories = [
     {
@@ -49,6 +55,7 @@ const Home = () => {
   }, []
 
 );
+
   return (
     <div>
       {/* Hero Section */}
@@ -59,12 +66,14 @@ const Home = () => {
           <h1 className="text-4xl md:text-6xl font-bold mb-6 ">
             Sustainable Comfort for Everyday Life
           </h1>
-          <p className="text-gray-600 mb-8 text-lg">
+          <p className="text-gray-800  mb-8 text-lg">
             Discover eco-friendly footwear designed for style and comfort.
           </p>
-          <button className="bg-black text-white px-8 py-3 rounded-md hover:bg-gray-800 transition">
+<Link to={"/shop"}>
+          <button  className="bg-black  text-white px-8 py-3 rounded-md hover:bg-gray-800 transition">
             Shop Now
           </button>
+</Link>
         </div>
       </section>
 
@@ -79,11 +88,14 @@ const Home = () => {
             <p className=" text-center text-gray-500">Loading products...</p>
           ) : (
             <div className=" grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8   ">
-              {products.map((product) => (
+              {FilterSearch.slice(0,4).map((product) => (
+                
                 <div
                   key={product.id}
                   className="bg-white shadow-md rounded-xl overflow-hidden hover:shadow-3xl hover:-translate-y-2   "
+                
                 >
+                  
                   <img
                     src={product.thumbnail}
                     alt={product.title}
@@ -96,9 +108,11 @@ const Home = () => {
                     <p className="text-gray-600 font-medium">
                       ${product.price}
                     </p>
+                    <Link to={"/shop"}>
                     <button className="mt-3   w-full bg-black text-white py-2 rounded hover:bg-gray-800 transition ">
-                      Add to Cart
+                      Shop New
                     </button>
+                    </Link>
                   </div>
                 </div>
               ))}

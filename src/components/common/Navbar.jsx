@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import men from '../../category/Men';
 import {
   FaShoppingBag,
   FaSearch,
@@ -44,13 +45,13 @@ const Navbar = ({cart,item , search, setSearch}) => {
 
             <ul className="absolute left-0 top-8 w-40 bg-white text-black shadow-lg rounded-md hidden group-hover:block">
               <li className="px-4 py-2 hover:bg-gray-100">
-                <Link to="/category/men">Men</Link>
+                <Link to="/men">Men</Link>
               </li>
               <li className="px-4 py-2 hover:bg-gray-100">
-                <Link to="/category/women">Women</Link>
+                <Link to="/women">Women</Link>
               </li>
               <li className="px-4 py-2 hover:bg-gray-100">
-                <Link to="/category/accessories">Accessories</Link>
+                <Link to="/accessories">Accessories</Link>
               </li>
             </ul>
           </li>

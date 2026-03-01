@@ -8,6 +8,9 @@ import Footer from "./components/common/Footer";
 import { useState } from "react";
 import Login from "./components/pages/Login";
 import Men from "./category/Men";
+import Women from "./category/Women";
+import Accessories from "./category/Accessories";
+import Sale from "./components/pages/Sale";
 
 function App() {
 
@@ -73,11 +76,13 @@ const removeCart = (product)=>{
 <Routes>
 <Route path="/" element={<Home cart={cart} setCart={setCart} addToCart={addToCart} removeCart={removeCart} search={search} />}/>
 <Route path="/cart" element={<Cart cart={cart} remove={remove} addToCart={addToCart} removeCart={removeCart}/>}/>
-<Route path="/shop" element={<Shop/>}/>
+<Route path="/shop" element={<Shop addToCart={addToCart} search={search} /> }/>
 <Route path="/productDetails" element={<ProductDetails/>}/>
 <Route path="/login" element={<Login/>}/>
-
 <Route path="/men" element={<Men/>}/>
+<Route path="/women" element={<Women/>}/>
+<Route path="/accessories" element={<Accessories/>}/>
+<Route path="/sale" element={<Sale addToCart={addToCart}/>}/>
 
 </Routes>
 </main>

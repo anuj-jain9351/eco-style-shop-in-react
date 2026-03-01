@@ -23,15 +23,17 @@ const Cart = ({ cart,remove,addToCart,removeCart}) => {
         >
           {/* Left - Image */}
           <img
-            src={item.thumbnail}
+            src={item.images}
             alt={item.title}
             className="w-28 h-28 object-contain"
           />
 
           {/* Center - Details */}
           <div className="flex-1 px-6 text-center sm:text-left">
-            <h3 className="font-semibold">{item.title}</h3>
-            <p className="text-gray-600">${item.price}</p>
+            <h3 className="font-extrabold">{item.title}</h3>
+            <p className="text-gray-600 font-bold">${item.price}</p>
+            <p className=" text-gray-600 "><span className="font-semibold">description-</span>{item.description}</p>
+            
           </div>
 
           {/* Right - Actions */}

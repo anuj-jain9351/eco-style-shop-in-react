@@ -39,12 +39,12 @@ const Home = ({cart,addToCart,search}) => {
   ]
 
   useEffect(() => {
-    fetch("https://dummyjson.com/products")
+    fetch("https://api.escuelajs.co/api/v1/products")
       .then((res) => res.json())
       .then((data) => {
         setTimeout(()=>{
           
-         setProducts(data.products);
+         setProducts(data);
         setLoading(false);
         },2000)
       })
@@ -97,9 +97,9 @@ const Home = ({cart,addToCart,search}) => {
                 >
                   
                   <img
-                    src={product.thumbnail}
+                    src={product.images}
                     alt={product.title}
-                    className="w-full h-64 object-contain p-4  hover:scale-125"
+                    className="w-full h-64 object-contain p-4  hover:scale-105"
                   />
                   <div className="p-4">
                     <h3 className="font-semibold text-sm mb-2 line-clamp-2">

@@ -2,8 +2,8 @@ import React from 'react'
 
 function Men(){
   return (
-    <div>
-      <h1 className='text-black'>Men</h1>
+    <div className=' flex justify-center items-center'>
+      <h1 className='text-black font-bold mt-10'>Men</h1>
     </div>
   )
 }

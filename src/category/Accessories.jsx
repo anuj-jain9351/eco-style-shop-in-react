@@ -2,8 +2,8 @@ import React from 'react'
 
 function Accessories(){
   return (
-    <div>
-      <h1 className=' text-black'>Accessories</h1>
+    <div className=' flex justify-center item-center '>
+      <h1 className=' text-black font-bold mt-10'>Accessories</h1>
     </div>
   )
 }

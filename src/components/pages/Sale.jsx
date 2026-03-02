@@ -6,7 +6,41 @@ function ModernSale({ addToCart,search }) {
   const [filtered,setFiltered] = useState([]);
   const [loading,setLoading]= useState(true);
   const [time,setTime] = useState({});
+  const [short,setShort] = useState("");
+  const [minPrice,setMinPrice] = useState("");
+  const [maxPrice,setMaxPrice] = useState("");
 
+  useEffect(()=>{
+    const uptade = [...product]
+    if(minPrice !== ""){
+     uptade = uptade.filter(p=>p.price >= minPrice); 
+    }
+    if(maxPrice !== ""){
+      uptade = uptade.filter(p=>p.price <= maxPrice);
+    }
+
+    if(short === "low"){
+      uptade.sort((a,b)=> a.price - b.price);
+    }
+
+    if(short === "high"){
+      uptade.sort((a,b)=> b.price - a.price);
+    }
+    setFiltered(uptade)
+  },[product,minPrice,maxPrice,short])
+
+
+  useEffect(()=>{
+    if(!search){
+      setFiltered(product)
+    }else{
+      const result = product.filter((item)=>{
+        
+       return item.title.toLowerCase().includes(search.toLowerCase())
+      })
+      setFiltered(result)
+    }
+  },[search,product])
 
 useEffect(()=>{
 const endDate = new Date();
@@ -92,7 +126,8 @@ const princert = 30;
           </h2>
 
           <select
-
+             value={short}
+             onChange={(e)=>setShort(e.target.value)}
             className="border px-4 py-2 rounded-lg"
           >
             <option value="">Sort By</option>
@@ -105,14 +140,14 @@ const princert = 30;
           <div>     
              {loading ? (
           <p className="text-center text-gray-500">Loading...</p>
-             ):product.length === 0?(
+             ):filtered.length === 0?(
             <p className="text-center text-gray-500">
               No products found 
             </p>
            ):(
         
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
-              {product.slice(0,6).map((item)=>{
+              {filtered.slice(0,6).map((item)=>{
                 const newPrice = (item.price - (item.price * 30)/100).toFixed()
               
                

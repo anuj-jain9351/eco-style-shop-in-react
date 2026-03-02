@@ -82,7 +82,7 @@ const removeCart = (product)=>{
 <Route path="/men" element={<Men/>}/>
 <Route path="/women" element={<Women/>}/>
 <Route path="/accessories" element={<Accessories/>}/>
-<Route path="/sale" element={<Sale addToCart={addToCart}/>}/>
+<Route path="/sale" element={<Sale addToCart={addToCart} search={search}/>}/>
 
 </Routes>
 </main>

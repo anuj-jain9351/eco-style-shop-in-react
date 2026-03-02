@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import men from '../../category/Men';
+// import men from '../../category/Men';
 import {
   FaShoppingBag,
   FaSearch,
@@ -15,8 +15,8 @@ const Navbar = ({cart,item , search, setSearch}) => {
 
 
   return (
-    <nav className="bg-white shadow-md sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between ">
+    <nav className="bg-white shadow-md sticky top-0 z-50 ">
+      <div className="max-w-7xl  mx-auto px-6 py-4 flex items-center justify-between ">
 
         {/* Logo */}
         <Link to="/" className="text-2xl font-bold">
@@ -24,7 +24,7 @@ const Navbar = ({cart,item , search, setSearch}) => {
         </Link>
 
         {/* Desktop Menu */}
-        <ul className="hidden md:flex sm:p-5 gap-8  font-semibold items-center ">
+        <ul className="hidden md:flex  sm:p-5 gap-8  font-semibold items-center  ">
           <li>
             <Link to="/" className="block py-2 hover:text-green-500 transition">
               Home
@@ -45,13 +45,13 @@ const Navbar = ({cart,item , search, setSearch}) => {
 
             <ul className="absolute left-0 top-8 w-40 bg-white text-black shadow-lg rounded-md hidden group-hover:block">
               <li className="px-4 py-2 hover:bg-gray-100">
-                <Link to="/men">Men</Link>
+                <Link to="/category/men">Men</Link>
               </li>
               <li className="px-4 py-2 hover:bg-gray-100">
-                <Link to="/women">Women</Link>
+                <Link to="/category/women">Women</Link>
               </li>
               <li className="px-4 py-2 hover:bg-gray-100">
-                <Link to="/accessories">Accessories</Link>
+                <Link to="category/accessories">Accessories</Link>
               </li>
             </ul>
           </li>
@@ -108,15 +108,15 @@ const Navbar = ({cart,item , search, setSearch}) => {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="   bg-white shadow-md px-10 py-4 space-y-4 font-semibold flex  gap-4">
+        <div className="   bg-white shadow-md px-2 py-4 space-y-4 font-semibold flex  gap-4">
           <Link className="mt-3.5" to="/" onClick={() => setIsOpen(false)}>Home</Link>
           <Link to="/shop" onClick={() => setIsOpen(false)}>Shop</Link>
-          <Link to="/category/men" onClick={() => setIsOpen(false)}>Men</Link>
-          <Link to="/category/women" onClick={() => setIsOpen(false)}>Women</Link>
-          <Link to="/category/accessories" onClick={() => setIsOpen(false)}>Accessories</Link>
           <Link to="/sale" onClick={() => setIsOpen(false)} className="text-red-500">
             Sale
           </Link>
+          <Link to="/category/men" onClick={()=> setIsOpen(false)}>Men</Link>
+          <Link to="/category/women" onClick={()=> setIsOpen(false)}>Women</Link>
+          <Link to="/category/accessories" onClick={()=> setIsOpen(false)}>Accessories</Link>
         </div>
       )}
     </nav>

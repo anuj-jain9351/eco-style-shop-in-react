@@ -1,19 +1,32 @@
 import React, { useEffect, useState } from "react";
 import {  useParams } from "react-router-dom";
 
-function Category({ addToCart }) {
+function Category({ addToCart,search }) {
   
 
   const { categoryName } = useParams();   // 🔥 dynamic value
 
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [filters,setFilter] = useState("");
 
   const categoryMap = {
   men: "Clothes",
   women: "Clothes",
   accessories: "Miscellaneous"
 };
+
+
+useEffect(()=>{
+   if(!search){
+    setFilter(products)
+   }else{
+    const result = products.filter((item)=>{
+       return item.title.toLowerCase().includes(search.toLocaleLowerCase())
+    })
+    setFilter(result)
+   }
+},[search,products]);
 
   useEffect(() => {
     fetch("https://api.escuelajs.co/api/v1/products")
@@ -31,6 +44,8 @@ function Category({ addToCart }) {
 
   }, [categoryName]);
 
+  
+
   return (
     <div className="max-w-7xl mx-auto px-6 py-10">
 
@@ -40,11 +55,11 @@ function Category({ addToCart }) {
 
       {loading ? (
         <p>Loading...</p>
-      ) : products.length === 0 ? (
+      ) : filters.length === 0 ? (
         <p>No products found</p>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {products.map(item => (
+          {filters.map(item => (
             <div key={item.id} className="bg-white shadow rounded p-4">
 
               <img

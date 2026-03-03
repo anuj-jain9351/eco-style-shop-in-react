@@ -1,7 +1,7 @@
 import {  Routes, Route, Link } from "react-router-dom";
 import Home from "./components/pages/Home";
 import Shop from "./components/pages/Shop";
-import ProductDetails from "./components/pages/ProductDetails";
+// import ProductDetails from "./components/pages/ProductDetails";
 import Cart from "./components/pages/Cart";
 import Navbar  from './components/common/Navbar';
 import Footer from "./components/common/Footer";
@@ -76,10 +76,10 @@ const removeCart = (product)=>{
 <Route path="/" element={<Home cart={cart} setCart={setCart} addToCart={addToCart} removeCart={removeCart} search={search} />}/>
 <Route path="/cart" element={<Cart cart={cart} remove={remove} addToCart={addToCart} removeCart={removeCart}/>}/>
 <Route path="/shop" element={<Shop addToCart={addToCart} search={search} /> }/>
-<Route path="/productDetails" element={<ProductDetails/>}/>
+{/* <Route path="/productDetails" element={<ProductDetails/>}/> */}
 <Route path="/login" element={<Login/>}/>
 <Route path="/sale" element={<Sale addToCart={addToCart} search={search}/>}/>
-<Route path="/category/:categoryName" element={<Category addToCart={addToCart}/>} />
+<Route path="/category/:categoryName" element={<Category addToCart={addToCart} search={search}/>} />
 </Routes>
 </main>
 <Footer/>

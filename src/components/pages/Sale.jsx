@@ -85,8 +85,8 @@ setLoading(false);
  })
 },[])
 
-const princert = 30;
-
+const off = 30;
+ 
   return (
     <div className="bg-[#f9f9f9] min-h-screen">
 
@@ -165,7 +165,7 @@ const princert = 30;
                     />
 
                     <span className="absolute top-4 left-4 bg-black text-white text-xs px-3 py-1 rounded-full">
-                    {princert} % OFF
+                    {off} % OFF
                     </span>
                   </div>
 
@@ -186,7 +186,10 @@ const princert = 30;
                     </div>
 
                     <button
-                    onClick={()=>addToCart(item)}
+                    onClick={()=>addToCart({
+                      ...item,
+                      price:(item.price - (item.price * 30)/100).toFixed()
+                    })}
                       className="w-full bg-black text-white py-3 rounded-xl hover:bg-gray-800 transition"
                     >
                       Add to Cart

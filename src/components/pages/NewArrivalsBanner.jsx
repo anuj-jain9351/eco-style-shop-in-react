@@ -4,9 +4,9 @@ import { Link } from "react-router-dom";
 
 function NewArrivalsBanner() {
   return (
-    <section className="relative h-[400px] w-full">
+    <section className="  relative h-[400px]   ">
 
-      {/* Background Image */}
+      
       <img
         src={img}
         alt="New Collection"

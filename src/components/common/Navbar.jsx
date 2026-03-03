@@ -108,7 +108,19 @@ const Navbar = ({cart,item , search, setSearch}) => {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="   bg-white shadow-md px-2 py-4 space-y-4 font-semibold flex  gap-4">
+        <div className="  grid  grid-row-2">    
+          <div className=" mx-14 flex ml- items-center border border-gray-300 rounded-full px-3 py-1 focus-within:border-green-500 transition">
+            <FaSearch className="text-gray-500 mr-2" />
+            <input
+               
+              type="text"
+              value={search}
+              onChange={(e)=>setSearch(e.target.value)}
+              placeholder="Search..."
+              className="outline-none bg-transparent text-sm w-40"
+            />
+          </div>
+           <div className="   bg-white shadow-md px-2 py-4 space-y-4 font-semibold flex  gap-2 ">
           <Link className="mt-3.5" to="/" onClick={() => setIsOpen(false)}>Home</Link>
           <Link to="/shop" onClick={() => setIsOpen(false)}>Shop</Link>
           <Link to="/sale" onClick={() => setIsOpen(false)} className="text-red-500">
@@ -117,6 +129,7 @@ const Navbar = ({cart,item , search, setSearch}) => {
           <Link to="/category/men" onClick={()=> setIsOpen(false)}>Men</Link>
           <Link to="/category/women" onClick={()=> setIsOpen(false)}>Women</Link>
           <Link to="/category/accessories" onClick={()=> setIsOpen(false)}>Accessories</Link>
+        </div>
         </div>
       )}
     </nav>

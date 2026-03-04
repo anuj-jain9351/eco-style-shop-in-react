@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link , NavLink } from "react-router-dom";
 // import men from '../../category/Men';
 import {
   FaShoppingBag,
@@ -25,41 +25,77 @@ const Navbar = ({cart,item , search, setSearch}) => {
 
         {/* Desktop Menu */}
         <ul className="hidden md:flex  sm:p-5 gap-8  font-semibold items-center  ">
-          <li>
-            <Link to="/" className="block py-2 hover:text-green-500 transition">
-              Home
-            </Link>
+          <li> 
+   <NavLink
+       to="/"
+       end
+       className={({ isActive }) =>
+       isActive ? "text-green-600 font-semibold" : "text-black"
+      }>
+            Home
+   </NavLink>
           </li>
 
           <li>
-            <Link to="/shop" className="block py-2 hover:text-green-500 transition">
-              Shop
-            </Link>
+                <NavLink
+                to="/shop"
+                className={({isActive})=>
+                  isActive ? "text-green-600 font-semibold" : "text:black"
+                }>
+                  Shop
+
+                </NavLink>
           </li>
 
           {/* Categories Dropdown */}
           <li className="relative group cursor-pointer">
             <span className="block py-2 hover:text-green-500 transition">
-              Categories
+                 Categories              
             </span>
 
-            <ul className="absolute left-0 top-8 w-40 bg-white text-black shadow-lg rounded-md hidden group-hover:block">
-              <li className="px-4 py-2 hover:bg-gray-100">
-                <Link to="/category/men">Men</Link>
+            <ul className="absolute left-0 top-8 w-40 bg-white text-black shadow-lg rounded-md hidden group-hover:block ">
+              <li className="px-4 py-2 hover:bg-gray-100 hover:text-red-500">
+                <NavLink
+                to="/category/men"
+                end
+                 className={({isActive})=>
+                  isActive ? "text-green-600 font-semibold" : "text-black"
+                 }
+                >
+                      Men
+                </NavLink>
               </li>
               <li className="px-4 py-2 hover:bg-gray-100">
-                <Link to="/category/women">Women</Link>
+                <NavLink
+                to="/category/women"
+                end
+                className={({isActive})=>
+                isActive ? "text-green-600 font-semibold" : " text-black"
+                }>
+                  Women
+                </NavLink>
               </li>
               <li className="px-4 py-2 hover:bg-gray-100">
-                <Link to="category/accessories">Accessories</Link>
+                <NavLink
+                 to="/category/accessories"
+                 end
+                 className={({isActive})=>
+                  isActive ? "text-green-600 font-semibold" : "text-black"
+                 }>
+                    Accessories
+                </NavLink>
               </li>
             </ul>
           </li>
 
           <li>
-            <Link to="/sale" className="text-red-500 hover:opacity-80">
-              Sale
-            </Link>
+            <NavLink
+            to="/sale"
+            end
+            className={({isActive})=>
+            isActive ? "text-green-600 font-semibold" :" text-red-500"}>
+                    Sale
+            </NavLink>
           </li>
         </ul>
 
@@ -109,7 +145,7 @@ const Navbar = ({cart,item , search, setSearch}) => {
       {/* Mobile Menu */}
       {isOpen && (
         <div className="  grid  grid-row-2">    
-          <div className=" mx-14 flex ml- items-center border border-gray-300 rounded-full px-3 py-1 focus-within:border-green-500 transition">
+          <div className=" mx-14 flex  ml- items-center border border-gray-300 rounded-full px-3 py-1 focus-within:border-green-500 transition">
             <FaSearch className="text-gray-500 mr-2" />
             <input
                
@@ -120,15 +156,39 @@ const Navbar = ({cart,item , search, setSearch}) => {
               className="outline-none bg-transparent text-sm w-40"
             />
           </div>
-           <div className="   bg-white shadow-md px-2 py-4 space-y-4 font-semibold flex  gap-2 ">
-          <Link className="mt-3.5" to="/" onClick={() => setIsOpen(false)}>Home</Link>
-          <Link to="/shop" onClick={() => setIsOpen(false)}>Shop</Link>
-          <Link to="/sale" onClick={() => setIsOpen(false)} className="text-red-500">
-            Sale
-          </Link>
-          <Link to="/category/men" onClick={()=> setIsOpen(false)}>Men</Link>
-          <Link to="/category/women" onClick={()=> setIsOpen(false)}>Women</Link>
-          <Link to="/category/accessories" onClick={()=> setIsOpen(false)}>Accessories</Link>
+           <div className="   bg-white shadow-md px-2 py-4 space-y-4 font-semibold flex flex-col  gap-2 ">
+            <NavLink
+            to="/" onClick={()=> setIsOpen(false)}
+            end
+            className={({isActive})=>
+            isActive ? "text-green-600 font-semibold" : " text-black"
+          }
+            >
+              Home
+            </NavLink>
+
+            <NavLink onClick={()=> setIsOpen(false)} to="/shop" 
+            end
+            className={({isActive})=>
+            isActive ? "text-green-600 font-semibold" :"text-black"}>
+                    Shop
+            </NavLink>
+          
+          <NavLink onClick={()=>setIsOpen(false)} to="/sale" className={({isActive})=>
+          isActive ? "text-green-600 font-semibold" : " text-black"}>
+             Sale
+          </NavLink>
+           <NavLink onClick={()=>setIsOpen(false)} to="category/men" end className={({isActive})=>
+          isActive ? "text-green-600 font-semibold" :" text-black"
+          }>Men</NavLink>
+          
+          <NavLink onClick={()=>setIsOpen(false)} to="/category/women" end className={({isActive})=>
+          isActive ? "text-green-600 font-semibold" :"text-black"}>
+                  Women
+          </NavLink>
+          <NavLink onClick={()=>setIsOpen(false)}  to="/category/accessories" end className={({isActive})=>
+          isActive ? "text-green-600 font-semibold" :"text-black"}>Accessories</NavLink>
+      
         </div>
         </div>
       )}

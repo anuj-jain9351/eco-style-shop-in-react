@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import imgs from './.././../assets/banerimg.png';
 import Trending from "./Trending";
 import NewArrivalsBanner from "./NewArrivalsBanner";
-import men from '.././../assets/HomeMen.jpg';
+import men from '.././../assets/sert.webp';
 import women from '.././../assets/HomeWomen.jpg';
 import kids from '.././../assets/kids.png';
 import Sports from '.././../assets/Sports.jpg';
@@ -15,8 +15,8 @@ const Home = ({cart,addToCart,search}) => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const FilterSearch = products.filter(products=>{
-   return products.title.toLowerCase().includes(search.toLowerCase() || " ")
+  const FilterSearch = products.filter(product=>{
+   return product.title.toLowerCase().includes(search?.toLowerCase() || " ")
   });
 
   const categories = [
@@ -39,12 +39,12 @@ const Home = ({cart,addToCart,search}) => {
   ]
 
   useEffect(() => {
-    fetch("https://api.escuelajs.co/api/v1/products")
+    fetch("https://dummyjson.com/products/category/sports-accessories")
       .then((res) => res.json())
       .then((data) => {
         setTimeout(()=>{
           
-         setProducts(data);
+         setProducts(data.products);
         setLoading(false);
         },2000)
       })
@@ -97,7 +97,7 @@ const Home = ({cart,addToCart,search}) => {
                 >
                   
                   <img
-                    src={product.images}
+                    src={product.images?.[0]}
                     alt={product.title}
                     className="w-full h-64 object-contain p-4  hover:scale-105"
                   />
@@ -122,29 +122,34 @@ const Home = ({cart,addToCart,search}) => {
       </section>
 
       {/* Category Section */}
-        <section className="py-16 bg-gray-100">
-      <div className="max-w-7xl mx-auto px-6">
-        <h2 className="text-3xl font-bold mb-8 text-center">Shop By Category</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-          {categories.map((cat, index) => (
-            <div
-              key={index}
-              className="relative group overflow-hidden rounded-lg cursor-pointer h-64"
-            >
-              <img
-                src={cat.img}
-                alt={cat.name}
-                className="w-full  object-cover group-hover:scale-110 transition duration-500"
-              />
-              <div className="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center">
-                <h3 className="text-white text-2xl font-bold">{cat.name}</h3>
-              </div>
-            </div>
-          ))}
+<section className="py-16 bg-gray-100">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6">
+    <h2 className="text-3xl font-bold mb-8 text-center">
+      Shop By Category
+    </h2>
+
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+      {categories.map((cat, index) => (
+        <div
+          key={index}
+          className="relative group overflow-hidden rounded-lg cursor-pointer aspect-[4/3]"
+        >
+          <img
+            src={cat.img}
+            alt={cat.name}
+            className="w-full h-full object-cover transition duration-500 group-hover:scale-110"
+          />
+
+          <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+            <h3 className="text-white text-2xl font-bold">
+              {cat.name}
+            </h3>
+          </div>
         </div>
-      </div>
-    </section>
-    <Trending/>
+      ))}
+    </div>
+  </div>
+</section>    <Trending/>
     <NewArrivalsBanner/>
     <WhyChooseUs/>
     <Testimonials/>

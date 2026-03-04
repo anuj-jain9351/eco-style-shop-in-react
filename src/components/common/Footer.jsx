@@ -6,51 +6,8 @@ import { FaYoutube } from "react-icons/fa";
 const Footer = () => {
 
   return (
-    <footer className="bg-black text-white mt-20">
+    <footer className="bg-black text-white mt-10">
       
-       <div className="flex gap-5 justify-center md:justify-start pt-4  ml-10">
-       
-         <a 
-           href="https://www.instagram.com/aankirsharma/" 
-           target="_blank" 
-           rel="noopener noreferrer"
-         >
-           <FaInstagram 
-             className="text-xl sm:text-2xl hover:text-orange-500 transition cursor-pointer" 
-           />
-         </a>
-       
-         <a 
-           href="https://x.com/ecommerce?lang=en" 
-           target="_blank" 
-           rel="noopener noreferrer"
-         >
-           <FaTwitter  
-             className="text-xl sm:text-2xl hover:bg-black transition cursor-pointer" 
-           />
-         </a>
-       
-         <a 
-           href="https://www.facebook.com/profile.php?id=61585168343265" 
-           target="_blank" 
-           rel="noopener noreferrer"
-         >
-           <FaFacebook
-             className="text-xl sm:text-2xl hover:text-blue-600 transition cursor-pointer" 
-           />
-         </a>
-       
-         <a 
-           href="https://www.youtube.com/watch?v=AXF4WhoDLus" 
-           target="_blank" 
-           rel="noopener noreferrer"
-         >
-           <FaYoutube 
-             className="text-xl sm:text-2xl hover:text-red-600  transition cursor-pointer" 
-           />
-         </a>
-       
-       </div>
       <div className="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
   
   
@@ -112,6 +69,52 @@ const Footer = () => {
               Join
             </button>
           </div>
+
+          {/* Links */}
+          
+       <div className="flex gap-5 justify-center md:justify-start pt-4  ml-2">
+       
+         <a 
+           href="https://www.instagram.com/aankirsharma/" 
+           target="_blank" 
+           rel="noopener noreferrer"
+         >
+           <FaInstagram 
+             className="text-xl sm:text-2xl hover:text-orange-500 transition cursor-pointer" 
+           />
+         </a>
+       
+         <a 
+           href="https://x.com/ecommerce?lang=en" 
+           target="_blank" 
+           rel="noopener noreferrer"
+         >
+           <FaTwitter  
+             className="text-xl sm:text-2xl hover:bg-black transition cursor-pointer" 
+           />
+         </a>
+       
+         <a 
+           href="https://www.facebook.com/profile.php?id=61585168343265" 
+           target="_blank" 
+           rel="noopener noreferrer"
+         >
+           <FaFacebook
+             className="text-xl sm:text-2xl hover:text-blue-600 transition cursor-pointer" 
+           />
+         </a>
+       
+         <a 
+           href="https://www.youtube.com/watch?v=AXF4WhoDLus" 
+           target="_blank" 
+           rel="noopener noreferrer"
+         >
+           <FaYoutube 
+             className="text-xl sm:text-2xl hover:text-red-600  transition cursor-pointer" 
+           />
+         </a>
+       
+       </div>
         </div>
 
       </div>

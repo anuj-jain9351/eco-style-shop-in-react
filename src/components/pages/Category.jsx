@@ -1,50 +1,70 @@
 import React, { useEffect, useState } from "react";
-import {  useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
-function Category({ addToCart,search }) {
-  
+function Category({ addToCart, search }) {
 
-  const { categoryName } = useParams();   // 🔥 dynamic value
+  const { categoryName } = useParams();
 
   const [products, setProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]); 
   const [loading, setLoading] = useState(true);
-  const [filters,setFilter] = useState("");
 
   const categoryMap = {
-  men: "Clothes",
-  women: "Clothes",
-  accessories: "Miscellaneous"
-};
+   men: "mens-shirts",
+    women: "womens-dresses",
+    accessories: "home-decoration"
+  };
 
-
-useEffect(()=>{
-   if(!search){
-    setFilter(products)
-   }else{
-    const result = products.filter((item)=>{
-       return item.title.toLowerCase().includes(search.toLocaleLowerCase())
-    })
-    setFilter(result)
-   }
-},[search,products]);
-
+ 
   useEffect(() => {
-    fetch("https://api.escuelajs.co/api/v1/products")
-      .then(res => res.json())
+    setLoading(true);
+
+    const SelectedCategoty = categoryMap[categoryName?.toLowerCase()];
+    
+    if( !SelectedCategoty){
+      setFilteredProducts([]);
+      setLoading(false);
+      return;
+    }
+
+    fetch(`https://dummyjson.com/products/category/${SelectedCategoty}`)
+        .then(res => res.json())
       .then(data => {
 
-        const filtered = data.filter(item =>
-          item.category.name === categoryMap[categoryName?.toLocaleLowerCase()]
-         
+        const selectedCategory =
+          categoryMap[categoryName?.toLowerCase()];
+
+        const result = data.products.filter(item =>
+          item.category?.toLowerCase() ===
+          selectedCategory?.toLowerCase()
         );
 
-        setProducts(filtered);
+        setProducts(data.products);
+        setFilteredProducts(result);
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error("Error fetching products:", err);
         setLoading(false);
       });
 
   }, [categoryName]);
 
-  
+
+
+  // 🔥 Search filter
+  useEffect(() => {
+    if (!search) {
+      setFilteredProducts(products);
+    } else {
+      const result = products.filter(item =>
+        item.title.toLowerCase().includes(search.toLowerCase())
+      );
+      setFilteredProducts(result);
+    }
+  }, [search, products]);
+
+
 
   return (
     <div className="max-w-7xl mx-auto px-6 py-10">
@@ -54,18 +74,19 @@ useEffect(()=>{
       </h1>
 
       {loading ? (
-        <p>Loading...</p>
-      ) : filters.length === 0 ? (
-        <p>No products found</p>
+        <p className="text-center">Loading...</p>
+      ) : filteredProducts.length === 0 ? (
+        <p className="text-center">No products found</p>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filters.map(item => (
+          {filteredProducts.map(item => (
             <div key={item.id} className="bg-white shadow rounded p-4">
 
               <img
                 src={item.images?.[0]}
                 alt={item.title}
                 className="w-full h-56 object-contain"
+                
               />
 
               <h3 className="mt-4 font-semibold">{item.title}</h3>

@@ -49,7 +49,7 @@ function TrendingFashion() {
               <img
                 src={item.image}
                 alt={item.name}
-                className="w-full h-96 object-cover rounded-xl group-hover:scale-105 transition duration-500"
+                className="w-full h-full object-contain rounded-xl group-hover:scale-105 transition duration-500"
               />
 
               {/* Hover Overlay */}

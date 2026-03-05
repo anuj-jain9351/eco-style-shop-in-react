@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-const Cart = ({ setCart,cart,remove,addToCart,removeCart, isLoggedIn }) => {
+const ProductDetailpage = ({ setCart,cart,remove,addToCart,removeCart, isLoggedIn }) => {
   
   const navigate = useNavigate();
 
- useEffect(()=>{
-  window.scrollTo(0,0)
- },[]);
+  useEffect(()=>{
+    return()=>{
+        setCart([]);
+    }
+  },[])
 
 const handlePlaceOrder = () => {
   if (!isLoggedIn) {
@@ -23,9 +25,9 @@ const handlePlaceOrder = () => {
 
 
   return (
-    <div className="max-w-9xl mx-auto scroll-me-24  h-full">
+    <div className="max-w-6xl mx-auto scroll-me-24  h-full">
   <h2 className="text-3xl font-bold mb-10 text-center">
-    Your Cart
+    Product Detail
   </h2>
 
   {cart.length === 0 ? (
@@ -36,37 +38,29 @@ const handlePlaceOrder = () => {
       {cart.map((item, index) => (
         <div
           key={index}
-          className="flex flex-col sm:flex-row   items-center justify-between bg-white shadow-md rounded-lg p-4"
+          className="flex-1 w-[300px]  sm:flex-row justify-center items-center bg-white shadow-md rounded-lg p-4"
         >
           {/* Left - Image */}
           <img
             src={item.images?.[0]}
             alt={item.title}
-            className="w-28 h-28 object-contain"
+            className="w-28 h-28 object-contain ml-14 "
           />
 
           {/* Center - Details */}
-          <div className="flex-1 px-6 text-center sm:text-left">
+          <div className="flex-1 w-[300px] px-6 text-center sm:text-left">
             <h3 className="font-extrabold">{item.title}</h3>
             <p className="text-gray-600 font-bold">${item.price}</p>
-            
-            {/* <p className=" text-gray-600 "><span className="font-semibold">description-</span>{item.description}</p> */}
+            <p className=" text-gray-600 "><span className="font-semibold ">description-</span>{item.description}</p>
             
           </div>
 
           {/* Right - Actions */}
-          <div className="flex items-center gap-4">
+          <div className="flex justify-center  mt-2 items-center gap-4">
             
-            <button onClick={() => removeCart(item) }  className="px-3 py-1 border">-</button>
+            <button onClick={() => removeCart(item) }  className="px-3 py-1 text-white bg-gray-600 rounded">-</button>
             <span>{item.quantity}</span>
-            <button onClick={()=> addToCart(item) } className="px-3 py-1 border">+</button>
-
-            <button
-              onClick={() => remove(index)}
-              className="bg-red-500 text-white px-4 py-1 rounded"
-            >
-              Remove
-            </button>
+            <button onClick={()=> addToCart(item) } className="px-3 py-1 border text-white bg-gray-600 rounded">+</button>
           </div>
         </div>
       ))}
@@ -84,4 +78,4 @@ const handlePlaceOrder = () => {
   );
 };
 
-export default Cart;
+export default ProductDetailpage;

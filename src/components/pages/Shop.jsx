@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import Cart from "./Cart";
 
 function Shop({ addToCart, search }) {
 
@@ -14,7 +16,7 @@ function Shop({ addToCart, search }) {
 
  
   useEffect(() => {
-    fetch("https://dummyjson.com/products?limit=10000")
+    fetch("https://dummyjson.com/products?limit=1000")
       .then(res => res.json())
       .then(data => {
         setProducts(data.products);
@@ -151,22 +153,29 @@ function Shop({ addToCart, search }) {
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {filtered.map(product => (
+                
                 <div
                   key={product.id}
                   className="bg-white shadow-md rounded-xl overflow-hidden"
                 >
+                <Link
+                  to="/productDetailpage"
+                  onClick={() => addToCart(product) }>  
                   <img
+                  loading="lazy"
                     src={product.images?.[0]}
                     alt={product.title}
-                    className="w-full h-48 object-cover p-4"
+                    className="w-full h-48 object-cover p-4 hover:bg-opacity-50"
                   />
+                  </Link>
 
                   <div className="p-4">
                     <h3 className="font-semibold text-sm mb-2 line-clamp-2">
                       {product.title}
                     </h3>
-
+                    <p className="flex mb-4 text-yellow-500 font-bold">★★★★★</p>
                     <p className="font-bold mb-3">${product.price}</p>
+                      
 
                     <button
                       onClick={() => addToCart(product)}
@@ -176,6 +185,7 @@ function Shop({ addToCart, search }) {
                     </button>
                   </div>
                 </div>
+              
               ))}
             </div>
           )}

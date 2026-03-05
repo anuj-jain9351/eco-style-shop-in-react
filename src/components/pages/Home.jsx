@@ -39,7 +39,7 @@ const Home = ({cart,addToCart,search}) => {
   ]
 
   useEffect(() => {
-    fetch("https://dummyjson.com/products/category/sports-accessories")
+    fetch("https://dummyjson.com/products?limit=4")
       .then((res) => res.json())
       .then((data) => {
         setTimeout(()=>{

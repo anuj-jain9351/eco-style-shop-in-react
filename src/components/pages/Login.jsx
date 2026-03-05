@@ -37,15 +37,15 @@ function Login({ setIsLoggedIn }){
  
 
   return (
-    <div className="   flex items-center justify-center bg-gradient-to-r from-purple-600 via-indigo-600 to-blue-600 p-6 ">
+    <div className="   flex items-center justify-center p-6 ">
 
       {/* Card */}
-      <div className="bg-white/10  backdrop-blur-lg rounded-3xl shadow-2xl w-full max-w-xl flex overflow-hidden ">
+      <div className="bg-gray-500  backdrop-blur-lg rounded-3xl shadow-2xl w-full max-w-xl flex overflow-hidden ">
 
         {/* Left Side - Form */}
         <div className="w-full md:w-1/2 p-10 text-white">
 
-          <h2 className="text-4xl font-bold mb-3">Welcome Back!</h2>
+          <h2 className="text-2xl font-bold mb-3">Welcome Back!</h2>
           <p className="mb-8 text-gray-200">Login to your account</p>
 
           {/* Email */}

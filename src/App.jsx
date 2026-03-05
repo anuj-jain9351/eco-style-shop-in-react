@@ -9,6 +9,7 @@ import { useState } from "react";
 import Login from "./components/pages/Login";
 import Category  from "./components/pages/category";
 import Sale from "./components/pages/Sale";
+import ProductDetailpage from "./components/pages/ProductDetailpage";
 
 
 function App() {
@@ -81,6 +82,7 @@ const removeCart = (product)=>{
 <Route path="/login" element={<Login  setIsLoggedIn={setIsLoggedIn} />}/>
 <Route path="/sale" element={<Sale addToCart={addToCart} search={search}/>}/>
 <Route path="/category/:categoryName" element={<Category addToCart={addToCart} search={search}/>} />
+<Route path="/productDetailpage" element={<ProductDetailpage cart={cart} setCart={setCart} remove={remove} addToCart={addToCart} removeCart={removeCart} isLoggedIn={isLoggedIn}/>}/>
 </Routes>
 </main>
 <Footer/>

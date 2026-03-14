@@ -1,20 +1,26 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
+ import { toast } from 'react-toastify';
 const Cart = ({ setCart,cart,remove,addToCart,removeCart, isLoggedIn }) => {
-  
-  const navigate = useNavigate();
+
+const { loginWithRedirect, isAuthenticated } = useAuth0();  
+  // const navigate = useNavigate();
 
  useEffect(()=>{
   window.scrollTo(0,0)
  },[]);
 
 const handlePlaceOrder = () => {
-  if (!isLoggedIn) {
-    navigate("/login");
+  if (!isAuthenticated) {
+    loginWithRedirect({
+      appState: { returnTo: "/cart" }   // jaha wapas aana hai
+    });
+    
   } else {
-    alert("Order Placed Successfully " );
-    setCart([])
+    toast.success("Order Placed Successfully " );
+    setCart([])  
          
     
   }

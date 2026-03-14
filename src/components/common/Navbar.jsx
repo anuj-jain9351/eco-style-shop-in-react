@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import { Link , NavLink } from "react-router-dom";
-// import men from '../../category/Men';
+import { useAuth0 } from "@auth0/auth0-react";
 import {
   FaShoppingBag,
   FaSearch,
-  FaUser,
   FaBars,
   FaTimes
 } from "react-icons/fa";
@@ -12,7 +11,7 @@ import {
 
 const Navbar = ({cart,item , search, setSearch}) => {
   const [isOpen, setIsOpen] = useState(false);
-
+  const {  loginWithRedirect  ,  isAuthenticated ,logout} = useAuth0();
 
   return (
     <nav className="bg-white shadow-md sticky top-0 z-50 ">
@@ -20,7 +19,7 @@ const Navbar = ({cart,item , search, setSearch}) => {
 
         {/* Logo */}
         <Link to="/" className="text-2xl font-bold">
-          EcoStyle
+  <img className=" h-20 w-20" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTL1wtcIfOGJvgmL3ixM3-42wc3ZXRHJ0gCw&s" alt="" />
         </Link>
 
         {/* Desktop Menu */}
@@ -101,7 +100,7 @@ const Navbar = ({cart,item , search, setSearch}) => {
 
         {/* Right Section */}
         <div className="flex items-center gap-5">
-
+  
           {/* Search (Desktop Only) */}
           <div className="hidden md:flex items-center border border-gray-300 rounded-full px-3 py-1 focus-within:border-green-500 transition">
             <FaSearch className="text-gray-500 mr-2" />
@@ -128,11 +127,16 @@ const Navbar = ({cart,item , search, setSearch}) => {
           </Link>
 
           {/* Profile */}
-          <Link to={"/login"}>      
-              <FaUser className="text-xl cursor-pointer hover:text-green-500 transition" />
-      </Link>
+           {
+            isAuthenticated ? <button className="py-1 px-2 rounded   bg-green-500" onClick={()=> logout({returnTo: window.location.origin})}>Log out</button>
+            :    <button className="py-1 px-2 rounded bg-green-500" onClick={()=>loginWithRedirect({
+      appState: { returnTo: window.location.pathname }
+    })}>Login</button>
+           }
+      
 
-          {/* Hamburger (Mobile Only) */}
+         
+              {/* Hamburger (Mobile Only) */}
           <button
             className="md:hidden text-xl"
             onClick={() => setIsOpen(!isOpen)}

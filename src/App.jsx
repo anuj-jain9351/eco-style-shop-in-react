@@ -5,7 +5,7 @@ import Shop from "./components/pages/Shop";
 import Cart from "./components/pages/Cart";
 import Navbar  from './components/common/Navbar';
 import Footer from "./components/common/Footer";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Login from "./components/pages/Login";
 import Category  from "./components/pages/category";
 import Sale from "./components/pages/Sale";
@@ -14,12 +14,17 @@ import ProductDetailpage from "./components/pages/ProductDetailpage";
 
 function App() {
 
-  const [cart ,setCart] = useState([]);
+  const [cart ,setCart] = useState( ()=> {
+  const savedCart = localStorage.getItem("cart");
+  return savedCart ? JSON.parse(savedCart) : [];
+});
+
+
   const [search,setSearch] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   
-   const addToCart = (product) => {
+   const addToCart = (product) => {  
   setCart((prevCart) => {
 
     // check karo product already cart me hai ya nahi
@@ -70,13 +75,18 @@ const removeCart = (product)=>{
 
   setCart(prev=> prev.filter((item , index)=>index!==indexRemove));
 }
+
+useEffect(()=>{
+  localStorage.setItem("cart",JSON.stringify(cart));
+},[cart]);
+
   return (
     <div>
 <Navbar cart={cart} search={search} setSearch={setSearch} />
 <main className="min-h-screen flex flex-col">
 <Routes>
 <Route path="/" element={<Home cart={cart} setCart={setCart} addToCart={addToCart} removeCart={removeCart} search={search} />}/>
-<Route path="/cart" element={<Cart cart={cart} setCart={setCart} remove={remove} addToCart={addToCart} removeCart={removeCart} isLoggedIn={isLoggedIn}/>}/>
+<Route path="/cart" element={<Cart cart={cart} setCart={setCart} remove={remove} addToCart={addToCart} removeCart={removeCart} />}/>
 <Route path="/shop" element={<Shop addToCart={addToCart} search={search} /> }/>
 {/* <Route path="/productDetails" element={<ProductDetails/>}/> */}
 <Route path="/login" element={<Login  setIsLoggedIn={setIsLoggedIn} />}/>
